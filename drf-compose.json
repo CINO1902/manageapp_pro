@@ -1,0 +1,363 @@
+{
+  "name": "attendance_mgt",
+  "include": {
+    "simple_jwt": true,
+    "django_filter": true,
+    "docker": true,
+    "dj-database-url": true
+  },
+  "app_with_model": [
+    {
+      "app_name": "attendance",
+      "models": [
+        {
+          "name": "Attendance",
+          "meta": {
+            "verbose_name": "Attendance",
+            "verbose_name_plural": "Attendances",
+            "ordering": ["-created_date"]
+          },
+          "use_uuid_as_key": true,
+          "fields": [
+            {
+              "name": "allocated_row",
+              "type": "integer"
+            },
+            {
+              "name": "service_index",
+              "type": "integer"
+            },
+            {
+              "name": "male_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "female_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "teenager_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "children_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "first_timer_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "coverts_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "vehicle_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "motor_bikes_count",
+              "type": "integer",
+              "options": {
+                "default": 0
+              }
+            },
+            {
+              "name": "event",
+              "type": "fk",
+              "options": {
+                "to": "service.Event",
+                "on_delete": "models.CASCADE"
+              }
+            },
+            {
+              "name": "counter",
+              "type": "fk",
+              "options": {
+                "related_name": "counter",
+                "to": "authentication.CustomUser",
+                "on_delete": "models.CASCADE"
+              }
+            },
+            {
+              "name": "count_coordinator",
+              "type": "fk",
+              "options": {
+                "related_name": "count_coordinator",
+                "to": "authentication.CustomUser",
+                "on_delete": "models.CASCADE"
+              }
+            },
+            {
+              "name": "updated_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now": true
+              }
+            },
+            {
+              "name": "created_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now_add": true
+              }
+            }
+          ],
+          "str": "counter"
+        }
+      ]
+    },
+    {
+      "app_name": "service",
+      "models": [
+        {
+          "name": "Event",
+          "use_uuid_as_key": true,
+          "meta": {
+            "verbose_name": "Event",
+            "verbose_name_plural": "Events",
+            "ordering": ["-created_date"]
+          },
+          "fields": [
+            {
+              "name": "service_type",
+              "type": "fk",
+              "options": {
+                "to": "service.ServiceType",
+                "on_delete": "models.CASCADE"
+              }
+            },
+            {
+              "name": "total_service_count",
+              "type": "integer"
+            },
+            {
+              "name": "total_seating_rows",
+              "type": "integer"
+            },
+            {
+              "name": "duration",
+              "type": "char",
+              "options": {
+                "help_text": "This is the service duration in format hr:min",
+                "max_length": 200
+              }
+            },
+            {
+              "name": "start_date",
+              "type": "dateTime"
+            },
+            {
+              "name": "updated_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now": true
+              }
+            },
+            {
+              "name": "created_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now_add": true
+              }
+            }
+          ],
+          "str": "name"
+        },
+        {
+          "name": "ServiceType",
+          "use_uuid_as_key": true,
+          "meta": {
+            "verbose_name": "ServiceType",
+            "verbose_name_plural": "ServiceTypes",
+            "ordering": ["-created_date"]
+          },
+          "fields": [
+            {
+              "name": "name",
+              "type": "char",
+              "options": {
+                "help_text": "This is the name of the service type",
+                "max_length": 200
+              }
+            },
+            {
+              "name": "updated_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now": true
+              }
+            },
+            {
+              "name": "created_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now_add": true
+              }
+            }
+          ],
+          "str": "name"
+        },
+        {
+          "name": "ServiceUnit",
+          "meta": {
+            "ordering": ["-created_date"]
+          },
+          "use_uuid_as_key": true,
+          "fields": [
+            {
+              "name": "name",
+              "type": "char",
+              "options": {
+                "help_text": "This is the name of the unit",
+                "max_length": 200
+              }
+            },
+            {
+              "name": "updated_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now": true
+              }
+            },
+            {
+              "name": "created_date",
+              "type": "dateTime",
+              "options": {
+                "auto_now_add": true
+              }
+            }
+          ],
+          "str": "name"
+        }
+      ]
+    }
+  ],
+  "auth_app": {
+    "app_name": "authentication",
+    "model_name": "CustomUser",
+    "meta": {
+      "verbose_name": "CustomUser",
+      "verbose_name_plural": "CustomUsers",
+      "ordering": ["-id"]
+    },
+    "username_field": "email",
+    "required_fields": ["phone"],
+    "use_uuid_as_key": true,
+    "fields": [
+      {
+        "name": "lga",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "nationality",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "options": {
+          "unique": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "phone",
+        "type": "char",
+        "options": {
+          "max_length": 15,
+          "blank": true,
+          "null": true
+        }
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "options": {
+          "blank": true,
+          "null": true
+        }
+      },
+      {
+        "name": "occupation",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "date_of_birth",
+        "type": "date"
+      },
+      {
+        "name": "created_by",
+        "type": "fk",
+        "options": {
+          "to": "service.ServiceUnit",
+          "on_delete": "models.CASCADE"
+        }
+      },
+      {
+        "name": "marital_status",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "next_of_kin",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      },
+      {
+        "name": "nok_address",
+        "type": "char",
+        "options": {
+          "blank": true,
+          "null": true,
+          "max_length": 200
+        }
+      }
+    ],
+    "str": "first_name"
+  }
+}
