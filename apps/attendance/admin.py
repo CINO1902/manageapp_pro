@@ -1,10 +1,10 @@
 from datetime import datetime
 from django.contrib import admin
-from rangefilter.filters import (
-    DateRangeFilterBuilder,
-    DateTimeRangeFilterBuilder,
-    NumericRangeFilterBuilder,
-)
+# from rangefilter.filters import (
+#     DateRangeFilterBuilder,
+#     DateTimeRangeFilterBuilder,
+#     NumericRangeFilterBuilder,
+# )
 
 from .models import Attendance
 
@@ -22,12 +22,12 @@ class AttendanceAdmin(admin.ModelAdmin):
         "count_coordinator",
     )
 
-    list_filter = (
-        (
-            "created_date",
-            DateTimeRangeFilterBuilder(
-                title="Search",
-                default_start=datetime.now(),
-            ),
-        ),
-    )
+    # list_filter = (
+    #     (
+    #         "created_date",
+    #         DateTimeRangeFilterBuilder(
+    #             title="Search",
+    #             default_start=datetime.now(),
+    #         ),
+    #     ),
+    # )
