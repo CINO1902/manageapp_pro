@@ -11,3 +11,4 @@ sqlparse==0.4.4
 zope.event==4.6
 zope.interface==6.0
 gunicorn
+drf-yasg
