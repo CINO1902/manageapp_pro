@@ -1,1 +1,2 @@
-web: gunicorn config.wsgi
+web: sh setup.sh && streamlit run app.py
+
