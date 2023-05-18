@@ -1,1 +1,1 @@
-web: gunicorn core.settings
+web: gunicorn apps.app
