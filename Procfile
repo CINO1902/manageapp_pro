@@ -1,1 +1,1 @@
-web: gunicorn core:attendance
+web: gunicorn core:wsgi
