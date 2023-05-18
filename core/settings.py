@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "drf_spectacular",
     "django_filters",
+    'rest_framework_simplejwt',
     "rangefilter",
 ]
 
