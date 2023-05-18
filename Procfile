@@ -1,1 +1,1 @@
-web: gunicorn -b :5000 --access-logfile - --error-logfile - core:wsgi
+web: gunicorn attendance_mgt:core
